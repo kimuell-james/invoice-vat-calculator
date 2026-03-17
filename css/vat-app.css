@@ -2,3 +2,7 @@
     align-items: center;
     justify-content: center;
 }
+
+.btn{
+    margin-bottom: 16px;
+}
