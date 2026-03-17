@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-    // Global DOM elements
     const amountInput = document.getElementById("amountInput");
     const percentInput = document.getElementById("percentInput");
     const vatInput = document.getElementById("vatInput");
@@ -14,20 +13,39 @@ document.addEventListener("DOMContentLoaded", function () {
     const calculateBtn = document.getElementById("calculateBtn");
     const clearBtn = document.getElementById("clearBtn");
 
+    amountInput.focus();
+
     calculateBtn.addEventListener("click", function () {
 
-        let amount = parseFloat(amountInput.value);
-        let percent = parseFloat(percentInput.value);
-        let vat = parseFloat(vatInput.value);
+        let amountValue = amountInput.value.trim();
+        let percentValue = percentInput.value.trim();
+        let vatValue = vatInput.value.trim();
 
-        if (isNaN(amount) || amount <= 0) {
-            alert("Please enter a valid amount.");
+        if (amountValue === "" || isNaN(Number(amountValue)) || Number(amountValue) <= 0) {
+            showAlert("Please enter a valid amount!", "danger");
+            clearFields();
+            amountInput.focus();
+            return;
+        } else {
+            clearAlerts();
+        }
+
+        let amount = Number(amountValue);
+
+        let percent = percentValue === "" ? 100 : Number(percentValue);
+        let vat = vatValue === "" ? 12 : Number(vatValue);
+
+        if (isNaN(percent)) {
+            showAlert("Please enter a valid percent!", "danger");
             clearFields();
             return;
         }
 
-        if (isNaN(percent)) percent = 100;
-        if (isNaN(vat)) vat = 12;
+        if (isNaN(vat)) {
+            showAlert("Please enter a valid VAT!", "danger");
+            clearFields();
+            return;
+        }
 
         let total = amount * (percent / 100);
         let net = total / ((vat / 100) + 1);
@@ -97,6 +115,29 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
 
+    function showAlert(message, type = "warning", duration = 5000) {
+        const alertPlaceholder = document.getElementById('alertPlaceholder');
+        const wrapper = document.createElement('div');
+        wrapper.innerHTML = `
+            <div class="alert alert-${type} alert-dismissible fade show" role="alert">
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        `;
+        alertPlaceholder.append(wrapper);
+
+        // Automatically remove after duration
+        setTimeout(() => {
+            const alertElement = bootstrap.Alert.getOrCreateInstance(wrapper.querySelector('.alert'));
+            alertElement.close();  // dismiss alert
+        }, duration);
+    }
+
+    function clearAlerts() {
+        const alertPlaceholder = document.getElementById('alertPlaceholder');
+        alertPlaceholder.innerHTML = "";  // remove all alerts
+    }
+
     function clearFields() {
         amountInput.value = "";
         percentInput.value = "";
@@ -106,6 +147,9 @@ document.addEventListener("DOMContentLoaded", function () {
         netOfVAT.value = "";
         lessOfVAT.value = "";
         amountInWords.value = "";
+
+        amountInput.focus();
+
     }
 
     clearBtn.addEventListener("click", clearFields);

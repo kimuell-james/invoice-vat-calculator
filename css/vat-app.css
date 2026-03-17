@@ -1,8 +1,21 @@
+.main {
+    max-width: 900px;   /* max width on desktop */
+    margin: 20px auto;  /* center horizontally */
+    padding: 20px;      /* inner spacing */
+}
+
+h1{
+    text-align: center;
+    margin: 20px 10px;
+}
+
 .input-group-text{
     align-items: center;
     justify-content: center;
 }
 
-.btn{
-    margin-bottom: 16px;
+@media (max-width: 768px) {
+    .main {
+        padding: 10px;
+    }
 }
