@@ -15,7 +15,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     amountInput.focus();
 
-    calculateBtn.addEventListener("click", function () {
+    document.getElementById("invoiceForm").addEventListener("submit", function(e){
+    e.preventDefault();
 
         let amountValue = amountInput.value.trim();
         let percentValue = percentInput.value.trim();
@@ -67,6 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         amountInWords.value = numberToWords(total);
+        autoResize();
 
     });
 
@@ -113,6 +115,11 @@ document.addEventListener("DOMContentLoaded", function () {
             return words.trim();
         }
 
+    }
+
+    function autoResize() {
+        amountInWords.style.height = "auto";
+        amountInWords.style.height = amountInWords.scrollHeight + "px";
     }
 
     function showAlert(message, type = "warning", duration = 5000) {

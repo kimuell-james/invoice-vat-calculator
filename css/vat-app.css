@@ -1,21 +1,86 @@
-.main {
-    max-width: 900px;   /* max width on desktop */
-    margin: 20px auto;  /* center horizontally */
-    padding: 20px;      /* inner spacing */
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    /* full viewport height */
 }
 
-h1{
+body {
+    display: flex;
+    flex-direction: column;
+    /* stack children vertically */
+    min-height: 100vh;
+    /* ensure body is full height */
+}
+
+.main {
+    width: 100%;
+    max-width: 900px;
+    flex: 1;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+h1 {
     text-align: center;
     margin: 20px 10px;
 }
 
-.input-group-text{
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 15px;
+}
+
+thead tr {
+    background: #f0f0f0;
+}
+
+th {
+    border: 1px solid #ccc;
+    padding: 5px;
+    text-align: left;
+}
+
+td {
+    border: 1px solid #ccc;
+    padding: 5px;
+}
+
+.input-group-text {
     align-items: center;
     justify-content: center;
 }
 
+#amountInWords {
+    text-transform: uppercase;
+}
+
+#how-to-use {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.brand {
+    font-family: 'JetBrains Mono', monospace;
+    color: #39FF14;
+    background: #121212;
+    margin: 0px;
+    padding: 8px 12px;
+    text-align: center;
+}
+
 @media (max-width: 768px) {
     .main {
-        padding: 10px;
+        padding: 20px;
     }
 }

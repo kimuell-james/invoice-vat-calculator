@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,80 +8,184 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/vat-app.css">
 </head>
+
 <body>
+    <h1>Invoice VAT Calculator</h1>
+
     <div class="main">
-        
-        <h1>Invoice VAT Calculator</h1>
 
-        <div id="alertPlaceholder"></div>
-        
-        <div class="row mb-3 align-items-center">
-            <label for="amountInput" class="col-12 col-md-2 col-form-label">Amount</label>
-            <div class="col-12 col-md-10">
-                <input type="text" class="form-control" id="amountInput" placeholder="Enter Amount">
-            </div>
-        </div>
+        <form id="invoiceForm">
 
-        <div class="row mb-3 align-items-center">
-            <label for="percentInput" class="col-12 col-md-2 col-form-label">Percent (Optional)</label>
-            <div class="col-12 col-md-10">
-                <div class="input-group">
-                    <input type="text" class="form-control" id="percentInput" placeholder="100">
-                    <span class="input-group-text">%</span>
+            <div id="alertPlaceholder"></div>
+
+            <div class="row mb-3 align-items-center">
+                <label for="amountInput" class="col-12 col-md-2 col-form-label">Amount</label>
+                <div class="col-12 col-md-10">
+                    <input type="text" class="form-control" id="amountInput" placeholder="Enter Amount">
                 </div>
             </div>
-        </div>
 
-        <div class="row mb-3 align-items-center">
-            <label for="vatInput" class="col-12 col-md-2 col-form-label">Value Added Tax (VAT)</label>
-            <div class="col-12 col-md-10">
-                <div class="input-group">
-                    <input type="text" class="form-control" id="vatInput" placeholder="12">
-                    <span class="input-group-text">%</span>
+            <div class="row mb-3 align-items-center">
+                <label for="percentInput" class="col-12 col-md-2 col-form-label">Percent (Optional)</label>
+                <div class="col-12 col-md-10">
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="percentInput" placeholder="100">
+                        <span class="input-group-text">%</span>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="row mb-3 align-items-center">
-            <label for="totalAmount" class="col-12 col-md-2 col-form-label">Total Amount</label>
-            <div class="col-12 col-md-10">
-                <input type="text" class="form-control" id="totalAmount">
+            <div class="row mb-3 align-items-center">
+                <label for="vatInput" class="col-12 col-md-2 col-form-label">Value Added Tax (VAT)</label>
+                <div class="col-12 col-md-10">
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="vatInput" placeholder="12">
+                        <span class="input-group-text">%</span>
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <div class="row mb-3 align-items-center">
-            <label for="netOfVAT" class="col-12 col-md-2 col-form-label">Net of VAT</label>
-            <div class="col-12 col-md-10">
-                <input type="text" class="form-control" id="netOfVAT">
+            <div class="row mb-3 align-items-center">
+                <label for="totalAmount" class="col-12 col-md-2 col-form-label">Total Amount</label>
+                <div class="col-12 col-md-10">
+                    <input type="text" class="form-control" id="totalAmount" readonly>
+                </div>
             </div>
-        </div>
 
-        <div class="row mb-3 align-items-center">
-            <label for="lessOfVAT" class="col-12 col-md-2 col-form-label">Less of VAT</label>
-            <div class="col-12 col-md-10">
-                <input type="text" class="form-control" id="lessOfVAT">
+            <div class="row mb-3 align-items-center">
+                <label for="netOfVAT" class="col-12 col-md-2 col-form-label">Net of VAT</label>
+                <div class="col-12 col-md-10">
+                    <input type="text" class="form-control" id="netOfVAT" readonly>
+                </div>
             </div>
-        </div>
 
-        <div class="row mb-3 align-items-center">
-            <label for="amountInWords" class="col-12 col-md-2 col-form-label">Amount in Words</label>
-            <div class="col-12 col-md-10">
-                <input type="text" class="form-control" id="amountInWords">
+            <div class="row mb-3 align-items-center">
+                <label for="lessOfVAT" class="col-12 col-md-2 col-form-label">Less of VAT</label>
+                <div class="col-12 col-md-10">
+                    <input type="text" class="form-control" id="lessOfVAT" readonly>
+                </div>
             </div>
-        </div>
 
-        <!-- BUTTONS WRAPPER -->
-        <div class="row mb-3">
-            <div class="col-12 text-center">
-                <button type="button" id="calculateBtn" class="btn btn-primary me-2 mb-2">Calculate</button>
-                <button type="button" id="clearBtn" class="btn btn-warning mb-2">Clear</button>
+            <div class="row mb-3 align-items-center">
+                <label for="amountInWords" class="col-12 col-md-2 col-form-label">Amount in Words</label>
+                <div class="col-12 col-md-10">
+                    <textarea type="text" class="form-control" id="amountInWords" rows="2" readonly></textarea>
+                </div>
             </div>
-        </div>
+
+            <!-- BUTTONS WRAPPER -->
+            <div class="row mb-3">
+                <div class="col-12 text-center">
+                    <button type="submit" id="calculateBtn" class="btn btn-primary me-2 mb-2">Calculate</button>
+                    <button type="button" id="clearBtn" class="btn btn-warning mb-2">Clear</button>
+                </div>
+            </div>
+
+        </form>
 
     </div>
-    
+
+    <hr>
+
+    <section id="how-to-use">
+        <h2>How to Use the Invoice VAT Calculator</h2>
+
+        <h3>Step 1: Enter Details</h3>
+        <ul>
+            <li><strong>Amount:</strong> Enter the subtotal or item price. Must be a positive number.</li>
+            <li><strong>Percent (%):</strong> Defaults to 100%. Represents the portion of the subtotal to calculate.
+                Can be changed.</li>
+            <li><strong>VAT (%):</strong> Defaults to 12%. This is the tax rate applied to the total. Can be
+                changed.</li>
+        </ul>
+
+        <h3>Step 2: Calculate</h3>
+        <p>Click the <strong>Calculate</strong> button or press <strong>Enter</strong> while focused on an input
+            field. The app validates your input and shows an alert if values are missing or invalid.</p>
+
+        <h3>Step 3: View Results</h3>
+        <ul>
+            <li><strong>Total Amount:</strong> Calculated as <code>Amount × (Percent / 100)</code></li>
+            <li><strong>Net of VAT:</strong> The subtotal without VAT, calculated as
+                <code>Total ÷ (1 + VAT/100)</code>
+            </li>
+            <li><strong>Less of VAT:</strong> The VAT portion of the total, calculated as
+                <code>Total − Net of VAT</code>
+            </li>
+            <li><strong>Amount in Words:</strong> The total amount is converted into words and displayed in ALL
+                CAPS.
+            </li>
+        </ul>
+
+        <h3>Example:</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Input</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Amount</td>
+                    <td>1,000.00</td>
+                </tr>
+                <tr>
+                    <td>Percent (%)</td>
+                    <td>100</td>
+                </tr>
+                <tr>
+                    <td>VAT (%)</td>
+                    <td>12</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p><strong>Output:</strong></p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Result</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Total Amount</td>
+                    <td>1,000.00</td>
+                </tr>
+                <tr>
+                    <td>Net of VAT</td>
+                    <td>892.86</td>
+                </tr>
+                <tr>
+                    <td>Less of VAT</td>
+                    <td>107.14</td>
+                </tr>
+                <tr>
+                    <td>Amount in Words</td>
+                    <td>ONE THOUSAND</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Tips</h3>
+        <ul>
+            <li>Always enter numeric values; empty or invalid inputs will show an alert.</li>
+            <li>Percent and VAT fields can be left blank to use the default values (100% and 12%).</li>
+            <li>The "Amount in Words" field will auto-expand for long totals.</li>
+            <li>For multiple items, sum them first and input the subtotal as Amount.</li>
+        </ul>
+    </section>
+
+    <footer>
+        <p class="brand">&lt;/Kim-Coded&gt;</p>
+    </footer>
+
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/vat-app.js"></script>
 </body>
+
 </html>
